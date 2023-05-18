@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROJECT_ROOT="/home/ubuntu/app"
-JAR_FILE="$PROJECT_ROOT/springboot-app.jar"
+JAR_FILE="$PROJECT_ROOT/bridge-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"
@@ -10,7 +10,7 @@ DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
 TIME_NOW=$(date +%c)
 
 echo "$TIME_NOW : copy $JAR_FILE" >> $DEPLOY_LOG
-cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
+cp $PROJECT_ROOT/build/libs/*.jar $PROJECT_ROOT
 
 echo "$TIME_NOW : run $JAR_FILE" >> $DEPLOY_LOG
 nohup java -jar $JAR_FILE > $APP_LOG 2> $ERROR_LOG &
