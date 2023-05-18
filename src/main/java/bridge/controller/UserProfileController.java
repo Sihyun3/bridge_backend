@@ -96,14 +96,14 @@ public class UserProfileController {
 	public ResponseEntity<Map<String, Object>> getPorfile(@PathVariable("userId") String userId) throws Exception {
 		Map<String, Object> result = new HashMap<>();
 		UserDto userDto = bridgeService.getUserDto(userId);
-		List<UserProfileDto> list = bridgeService.getPorfile(userId);
-		List<TagDto> taglist = bridgeService.getTaglist(userId);
+		UserProfileDto list = bridgeService.getPorfile(userId);
+		List<TagDto> taglist = bridgeService.getTaglist(list.getUserProfileIdx());
 		List<ReviewDto> reviewDto = bridgeService.getReview(userId);
 		result.put("profile", list);
 		result.put("taglist", taglist);
 		result.put("reviewlist", reviewDto);
 		result.put("userDto", userDto);
-		if (list == null) {
+		if (taglist == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(result);

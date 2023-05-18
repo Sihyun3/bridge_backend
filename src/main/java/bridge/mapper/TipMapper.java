@@ -25,4 +25,6 @@ public interface TipMapper {
 
 	void deleteTip(int tbIdx);
 
+	void updateHeart(int tbIdx);
+
 }

@@ -84,7 +84,7 @@ public interface BridgeMapper {
 	int deletePartnerContent(int pcIdx) throws Exception;
 	
 	// 7. 파트너 협업창 결제 내역
-	PayListDto selectPayList(PayListDto payListDto) throws Exception;
+	PayListDto selectPayList(int pdNumber) throws Exception;
 	
 	// 8. 파트너 협업창 작업목록 조회
 	List<PartnerDetailDto> selectProjectList(String userId1) throws Exception;
@@ -97,9 +97,9 @@ public interface BridgeMapper {
 
 	void insertTag(TagDto tag);
 
-	List<UserProfileDto> getPorfile(String userId);
+	UserProfileDto getPorfile(String userId);
 
-	List<TagDto> getTaglist(String userId);
+	List<TagDto> getTaglist(int tagIdx);
 
 	List<ReviewDto> getReview(String userId);
 

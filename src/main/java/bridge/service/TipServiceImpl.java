@@ -62,4 +62,11 @@ public class TipServiceImpl implements TipService{
 		tipMapper.deleteTip(tbIdx);
 	}
 
+	@Override
+	public void updateHeart(int tbIdx) {
+		tipMapper.updateHeart(tbIdx);
+		
+	}
+
+
 }

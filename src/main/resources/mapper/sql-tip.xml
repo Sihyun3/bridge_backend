@@ -49,4 +49,10 @@
 		FROM tip_board
 		WHERE tb_idx = #{tbIdx} 
 	</delete>
+	<insert id="updateHeart" parameterType="Integer">
+		update tip_board
+		set
+		tb_Heart = tb_Heart+1 
+		where tb_idx = #{tbIdx}
+	</insert>
 </mapper>

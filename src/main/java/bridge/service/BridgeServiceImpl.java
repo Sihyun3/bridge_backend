@@ -149,8 +149,8 @@ public class BridgeServiceImpl implements BridgeService {
 
 	// 7. 파트너 협업창 결제 내역
 	@Override
-	public PayListDto selectPayList(PayListDto payListDto) throws Exception {
-		return bridgeMapper.selectPayList(payListDto);
+	public PayListDto selectPayList(int pdNumber) throws Exception {
+		return bridgeMapper.selectPayList(pdNumber);
 	}
 
 	// 8. 파트너 협업창 작업목록 조회
@@ -178,13 +178,13 @@ public class BridgeServiceImpl implements BridgeService {
 	}
 
 	@Override
-	public List<UserProfileDto> getPorfile(String userId) {
+	public UserProfileDto getPorfile(String userId) {
 		// TODO Auto-generated method stub
 		return bridgeMapper.getPorfile(userId);
 	}
 
 	@Override
-	public List<TagDto> getTaglist(String userId) {
+	public List<TagDto> getTaglist(int userId) {
 		// TODO Auto-generated method stub
 		return bridgeMapper.getTaglist(userId);
 	}

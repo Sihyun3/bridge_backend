@@ -82,4 +82,8 @@ public class TipApiController {
 		tipService.deleteTip(tbIdx);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
+	@PutMapping("api/heart/{tb_idx}")
+	public void updateHeart(@PathVariable("tb_idx") int tbIdx){
+		tipService.updateHeart(tbIdx);
+	}
 }

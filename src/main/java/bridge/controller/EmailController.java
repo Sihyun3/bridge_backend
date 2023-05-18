@@ -17,11 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailController {
 	
 	@Autowired
-      EmailService emailService;
+    EmailService emailService;
 
-    @PostMapping("/emailConfirm/{email}")
+   @PostMapping("/emailConfirm/{email}")
     public String emailConfirm(@PathVariable("email") String email) throws Exception {
-    	log.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+email);
       String confirm = emailService.sendSimpleMessage(email);
       return confirm;
     }

@@ -4,8 +4,8 @@
 <mapper namespace="bridge.mapper.JamMapper">
 
 	<insert id="insertJam" parameterType="bridge.dto.ConcertDto">
-		insert into concert (c_title,c_contents,c_photo,c_writer)
-		values (#{title},#{content},#{cPhoto},#{cWriter})
+		insert into concert (c_title,c_contents,c_photo,c_writer,c_data)
+		values (#{title},#{content},#{cPhoto},#{cWriter},now())
 		<selectKey keyProperty="cIdx" resultType="int" order="AFTER">
 			select
 			last_insert_id();

@@ -99,15 +99,14 @@ public class NoticeController {
 	/* 공지 삭제 */
 	@DeleteMapping("/api/notice/delete/{noticeIdx}")
 	public ResponseEntity<String> deleteNotice(@PathVariable ("noticeIdx") int noticeIdx, Authentication authentication) throws Exception{
-		System.out.println("deldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldeldel");
+
 		try {
 			UserDto userDto = (UserDto) authentication.getPrincipal();
 			NoticeDto noticeDto = jpaService.noticeDetail(noticeIdx);
 
 			if (noticeDto.getWriter().equals(noticeDto.getWriter()) || userDto.getUserId().equals("admin") ) {
-				System.out.println("if문안에 들어옴if문안에 들어옴if문안에 들어옴if문안에 들어옴if문안에 들어옴if문안에 들어옴");
+				
 				int deletedCount = jpaService.deleteNotice(noticeIdx);
-				System.out.println("deletedCount >>>>>>>>>>>>>" + deletedCount);
 				if (deletedCount != 1) {
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제에 실패했습니다");
 				} else {
@@ -133,6 +132,3 @@ public class NoticeController {
 //	        }
 //	    }
 //}
-	
-
-

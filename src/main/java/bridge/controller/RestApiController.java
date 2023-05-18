@@ -7,11 +7,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -44,11 +49,9 @@ public class RestApiController {
 
 	@Autowired
 	private BridgeService bridgeService;
-	
+
 	@Autowired
 	private BridgeMapper bridgeMapper;
-
-	
 
 	@GetMapping("/api/getMusic/{musicUUID}")
 	public void getMusic(@PathVariable("musicUUID") String musicUUID, HttpServletResponse response) throws Exception {
@@ -61,7 +64,7 @@ public class RestApiController {
 		try {
 			response.setHeader("Content-Disposition", "inline;");
 			byte[] buf = new byte[1024];
-			fis = new FileInputStream(UPLOAD_PATH + musicUUID );
+			fis = new FileInputStream(UPLOAD_PATH + musicUUID);
 			bis = new BufferedInputStream(fis);
 			bos = new BufferedOutputStream(response.getOutputStream());
 			int read;
@@ -96,6 +99,21 @@ public class RestApiController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					System.out.println("나는 빡빡이다");
+					delete(musicUUID);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		};
+		timer.schedule(task,3600000 );
+//		1시간 3600000
 
 		return ResponseEntity.ok(result);
 	}
@@ -118,6 +136,7 @@ public class RestApiController {
 					break;
 				}
 			}
+	
 			process.waitFor();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
@@ -134,7 +153,9 @@ public class RestApiController {
 
 		File[] files = file.listFiles();
 		List<String> fileNames = new ArrayList<>();
+		
 
+	
 		for (File f : files) {
 			String fileName = f.getName();
 			fileNames.add(fileName);
@@ -200,9 +221,7 @@ public class RestApiController {
 		int insertedCount = 0;
 		String uuid = UUID.randomUUID().toString();
 		List<String> fileNames = new ArrayList<>();
-
 		Map<String, Object> result = new HashMap<>();
-
 		try {
 			for (MultipartFile mf : files) {
 				String originFileName = mf.getOriginalFilename();
@@ -210,20 +229,17 @@ public class RestApiController {
 					File f = new File(UPLOAD_PATH + File.separator + uuid + ".mp3");
 					System.out.println("---------------------------" + f);
 					mf.transferTo(f);
-
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				}
 				fileNames.add(originFileName);
 				insertedCount++;
-
 				MusicDto musicDto = new MusicDto();
 				musicDto.setMusicTitle(originFileName);
 				musicDto.setMusicUUID(uuid);
 				musicDto.setCIdx(cIdx);
 				bridgeService.insertMusic(musicDto);
 			}
-
 			if (insertedCount > 0) {
 				result.put("uuid", uuid);
 				result.put("fileNames", fileNames);
@@ -239,8 +255,6 @@ public class RestApiController {
 		}
 	}
 
-
-
 	// 신고 작성
 	@PostMapping("/api/report/{reportedUserId}")
 	public ResponseEntity<Map<String, Object>> insertReport(@RequestBody ReportDto reportDto,
@@ -249,7 +263,6 @@ public class RestApiController {
 		try {
 			reportDto.setReportedUserId(reportedUserId);
 			reportDto.getUserId();
-
 			insertedCount = bridgeService.insertReport(reportDto);
 			if (insertedCount > 0) {
 				bridgeMapper.plusReportCount(reportedUserId);
@@ -257,7 +270,6 @@ public class RestApiController {
 				result.put("message", "정상적으로 등록되었습니다.");
 				result.put("reportedUserId", reportDto.getReportedUserId());
 				result.put("userId", reportDto.getUserId());
-
 				return ResponseEntity.status(HttpStatus.OK).body(result);
 			} else {
 				Map<String, Object> result = new HashMap<>();
@@ -295,7 +307,6 @@ public class RestApiController {
 			return ResponseEntity.status(HttpStatus.OK).body(announcementDto);
 		}
 	}
-	
 
 	// 유저 포인트 충전
 	@GetMapping("/api/chargePoint/{userId}")
@@ -308,4 +319,19 @@ public class RestApiController {
 		}
 	}
 
+	public void delete(String musicUUID) throws Exception {
+		String path = "c:\\test\\output\\"+ musicUUID + "\\";
+		File file = new File(path);
+		File[] files = file.listFiles();
+		for (File f : files) {
+			String fileName = f.getName();
+			Path filePath = Paths.get("c:\\test\\output\\"+musicUUID +"\\"+fileName);
+			Files.delete(filePath);
+		}
+	}
+	@GetMapping("/api/test")
+	public ResponseEntity<String> test (){
+		return ResponseEntity.status(HttpStatus.OK).body("테스트 입니다.");
+
+	}
 }

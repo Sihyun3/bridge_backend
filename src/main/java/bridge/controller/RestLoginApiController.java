@@ -19,6 +19,7 @@ import bridge.service.LoginService;
 
 @RestController
 public class RestLoginApiController {
+	
 	@Autowired
 	private LoginService loginService;
 
@@ -30,7 +31,6 @@ public class RestLoginApiController {
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(registedCount);
 		}
-
 	}
 
 	@Autowired
@@ -42,7 +42,6 @@ public class RestLoginApiController {
 		String jwtToken = jwtTokenUtil.generateToken(userDtos);
 		response.setHeader("token", jwtToken);
 		response.getWriter().write(jwtToken);
-
 	}
 
 	@GetMapping("/api/user")
@@ -71,14 +70,26 @@ public class RestLoginApiController {
 		int result = loginService.userIdCheck(userId);
 		return result;
 	}
+	
 	@PostMapping("/api/findid/{email}")
 	public String findId(@PathVariable("email") String email) {
 		String result = loginService.findId(email);
 		return result;
 	}
+	
 	@PutMapping("api/findPassword/{email}/{password}")
 	public void findPassword(@PathVariable("email")String email,@PathVariable("password")String password) {
 		loginService.findPassword(email,password);	
+	}
+	
+	@PostMapping("/api/emailid/{email}/{userId}")
+	public int emailId (@PathVariable("email") String email,@PathVariable("userId")String userId) {
+		String emailToId = loginService.findId(email);
+		if(userId == emailToId) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 	
 }

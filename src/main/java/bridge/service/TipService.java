@@ -23,4 +23,6 @@ public interface TipService {
 
 	void deleteTip(int tbIdx);
 
+	void updateHeart(int tbIdx);
+
 }

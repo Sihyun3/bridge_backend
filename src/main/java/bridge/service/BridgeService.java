@@ -75,7 +75,7 @@ public interface BridgeService {
 	public int deletePartnerContent(int pcIdx) throws Exception;
 
 	// 7. 파트너 협업창 결제 내역
-	public PayListDto selectPayList(PayListDto payListDto) throws Exception;
+	public PayListDto selectPayList(int pdNumber) throws Exception;
 
 	// 8. 파트너 협업창 작업목록 조회
 	public List<PartnerDetailDto> selectProjectList(String userId1) throws Exception;
@@ -89,9 +89,9 @@ public interface BridgeService {
 
 	public void insertTag(TagDto tag);
 
-	public List<UserProfileDto> getPorfile(String userId);
+	public UserProfileDto getPorfile(String userId);
 
-	public List<TagDto> getTaglist(String userId);
+	public List<TagDto> getTaglist(int i);
 
 	public List<ReviewDto> getReview(String userId);
 

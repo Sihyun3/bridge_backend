@@ -143,10 +143,10 @@
 	<insert id="insertProfile">
 		insert into user_profile
 		(user_id, user_position,
-		user_introduction, profile_img, user_site,user_music)
+		user_introduction, profile_img, user_site,user_music,user_portfolio)
 		values
 		(#{userId}, #{userPosition}, #{userIntroduction}, #{profileImg},
-		#{userSite},#{userMusic})
+		#{userSite},#{userMusic},#{userPortfolio})
 	</insert>
 
 

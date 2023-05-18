@@ -50,7 +50,6 @@ public class bridgeApiController {
 
 	// 3. 파트너 협업창 게시글 상세조회
 	@GetMapping("api/bridge/partnerdetail/content/{pcIdx}")
-	@ResponseBody
 	public ResponseEntity<PartnerContentDto> openPartnerContentDetail(@PathVariable("pcIdx") int pcIdx)
 			throws Exception {
 		PartnerContentDto partnerContentDto = bridgeService.selectPartnerContentDetail(pcIdx);
@@ -68,17 +67,17 @@ public class bridgeApiController {
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas" + pcImg);
 //			PartnerContentDto partnerContentDto = new PartnerContentDto();
 		try {
-			if (pcImg != null) {	
-			for (MultipartFile mf : pcImg) {
-				String originFileName = mf.getOriginalFilename();
-				try {
-					File f = new File(UPLOAD_PATH + originFileName);
-					mf.transferTo(f);
-				} catch (IllegalStateException e) {
-					e.printStackTrace();
+			if (pcImg != null) {
+				for (MultipartFile mf : pcImg) {
+					String originFileName = mf.getOriginalFilename();
+					try {
+						File f = new File(UPLOAD_PATH + originFileName);
+						mf.transferTo(f);
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					}
+					partnerContentDto.setPcFile(originFileName);
 				}
-				partnerContentDto.setPcFile(originFileName);
-			}
 			}
 			System.out.println("aaaaaaaaaaaaaaaaaaaasssssssssssssssssss" + partnerContentDto);
 
@@ -169,22 +168,15 @@ public class bridgeApiController {
 	}
 
 	// 7. 파트너 협업창 결제 내역
-	@GetMapping("/api/bridge/partnerDetail/paylist/{userId1}/{userId2}")
-	public ResponseEntity<PayListDto> openPayList(@PathVariable("userId1") String userId1,
-			@PathVariable("userId2") String userId2) throws Exception {
-		PayListDto payListDto = new PayListDto();
-
-		payListDto.setUserId1(userId1);
-		payListDto.setUserId2(userId2);
-
-		PayListDto payListDto1 = bridgeService.selectPayList(payListDto);
-
-		if (payListDto1 != null) {
-			return ResponseEntity.status(HttpStatus.OK).body(payListDto1);
-		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-	}
+//	@GetMapping("/api/bridge/partnerdetail/paylist/{pdNumber}")
+//	public ResponseEntity<PayListDto> openPayList(@PathVariable("pdNumber") int pdNumber) throws Exception {
+//		PayListDto payListDto1 = bridgeService.selectPayList(pdNumber);
+//		if (payListDto1 != null) {
+//			return ResponseEntity.status(HttpStatus.OK).body(payListDto1);
+//		} else {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//		}
+//	}
 
 	// 8. 파트너 협업창 작업목록 조회
 	@GetMapping("/api/bridge/partnerDetail/projectList/{userId1}")
@@ -192,7 +184,6 @@ public class bridgeApiController {
 		try {
 
 			List<PartnerDetailDto> list1 = bridgeService.selectProjectList(userId1);
-
 			if (list1.size() != 0) {
 				return ResponseEntity.status(HttpStatus.OK).body(list1);
 			} else {
@@ -207,7 +198,6 @@ public class bridgeApiController {
 	@GetMapping("/api/bridge/partnerDetail/comment/{pcIdx}")
 	public ResponseEntity<List<PartnerDetailCommentDto>> openPartnerCommentList(@PathVariable("pcIdx") int pcIdx)
 			throws Exception {
-
 		try {
 
 			List<PartnerDetailCommentDto> list = bridgeService.selectPartnerComment(pcIdx);
@@ -236,6 +226,7 @@ public class bridgeApiController {
 		}
 
 	}
+	
 
 	//
 
