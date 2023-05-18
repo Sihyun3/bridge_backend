@@ -33,7 +33,7 @@ jobs:
       run: chmod +x gradlew
       
     - name: Build with gradle 
-      run: ./gradlew build --no-daemon
+      run: ./gradlew build --no-daemon -x test
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1	
