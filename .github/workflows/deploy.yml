@@ -42,8 +42,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
         
-    - name: log
-      run: echo $GITHUB_SHA
       
     - name: Upload to AWS S3
       run: |
@@ -51,7 +49,7 @@ jobs:
           --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
           --ignore-hidden-files \
           --s3-location s3://${{env.S3_BUCKET_NAME}}/$GITHUB_SHA.zip \
-          --source ./build/libs/*.jar
+          --source $PROJECT_PATH/build/libs/*.jar
 
     - name: Deploy to AWS EC2 from S3
       run: |
