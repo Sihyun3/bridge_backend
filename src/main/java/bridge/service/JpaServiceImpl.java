@@ -28,6 +28,12 @@ public class JpaServiceImpl implements JpaService {
 	}
 	
 	@Override
+	public void insertChat(ChattingEntity chattingEntity) {
+		jpaChattingRepository.save(chattingEntity);
+		
+	}
+	
+	@Override
 	public void insertData(MessageEntity messageEtity) {
 		jpaMessageRepository.save(messageEtity);
 	}
@@ -85,6 +91,8 @@ public class JpaServiceImpl implements JpaService {
 	public int selectNoticeListCount() throws Exception {
 		return noticeMapper.selectNoticeListCount();
 	}
+
+	
 
 
 
