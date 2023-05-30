@@ -11,7 +11,7 @@ import bridge.dto.UserDto;
 public interface LoginMapper {
 	public UserDto login(LoginDto loginDto) throws Exception;
 	public int registUser(UserDto userDto) throws Exception;
-	public UserDto selectUserByUserId(String userId) ;
+	public UserDto selectUserByUserId(String userId);
 	public UserDto getloginDto(UserDto userDto);
 	//
 	UserDto passInformation(UserDto usersDto) throws Exception;
@@ -21,4 +21,6 @@ public interface LoginMapper {
 	public String findId(String email);
 	public UserDto findPassword(String email);
 	public void updatePassword(UserDto userDto);
+	//추가
+	public int selectHalted(String username);
 }

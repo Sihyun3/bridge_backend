@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +21,9 @@ import bridge.dto.ReviewDto;
 import bridge.dto.TagDto;
 import bridge.dto.UserDto;
 import bridge.dto.UserProfileDto;
+import bridge.mapper.BridgeMapper;
 import bridge.service.BridgeService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -32,8 +33,11 @@ public class UserProfileController {
 
 	@Autowired
 	BridgeService bridgeService;
+	
+	@Autowired
+	BridgeMapper bridgeMapper;
 
-	// 프로필 작성
+	@ApiOperation(value="프로필 작성")
 	@PostMapping("/api/insertProfile/{userId}")
 	public ResponseEntity<Map<String, Object>> insertProfile(@PathVariable("userId") String userId,
 			@RequestPart(value = "data", required = false) UserProfileDto userProfileDto,
@@ -41,15 +45,12 @@ public class UserProfileController {
 			@RequestPart(value = "music", required = false) MultipartFile[] files1,
 			@RequestPart(value = "tag", required = false) TagDto tag) throws Exception {
 		System.out.println(tag);
-		String UPLOAD_PATH = "C:\\Temp\\";
+		String UPLOAD_PATH = "/home/ubuntu/temp/";
 		int insertedCount = 0;
 		try {
 			for (MultipartFile mf : files) {
 				String uuid = UUID.randomUUID().toString();
-//				String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//				String safeFile = System.currentTimeMillis() + originFileName;
 				userProfileDto.setProfileImg(uuid);
-//				fileNames = fileNames + "," + safeFile;
 				try {
 					File f1 = new File(UPLOAD_PATH + uuid + ".jpg");
 					mf.transferTo(f1);
@@ -67,10 +68,20 @@ public class UserProfileController {
 					e.printStackTrace();
 				}
 			}
-			tag.setUserId(userId);
-			bridgeService.insertTag(tag);
+			
+			userProfileDto.setUserId(userId);
+			
 			insertedCount = bridgeService.insertProfile(userProfileDto);
-
+			
+			tag.setUserProfileIdx(userProfileDto.getUserProfileIdx());
+			bridgeService.insertTag(tag);
+			
+			tag.setUserTag1(tag.getTags().length > 0 ? tag.getTags()[0] : null);
+			tag.setUserTag2(tag.getTags().length > 1 ? tag.getTags()[1] : null);
+			tag.setUserTag3(tag.getTags().length > 2 ? tag.getTags()[2] : null);
+			
+			bridgeMapper.tagToProfile(tag);
+			
 			if (insertedCount > 0) {
 				Map<String, Object> result = new HashMap<>();
 				result.put("message", "정상적으로 등록되었습니다.");
@@ -92,12 +103,19 @@ public class UserProfileController {
 		}
 	}
 	
+	@ApiOperation(value="프로필 조회")
 	@GetMapping("/api/profile/{userId}")
 	public ResponseEntity<Map<String, Object>> getPorfile(@PathVariable("userId") String userId) throws Exception {
 		Map<String, Object> result = new HashMap<>();
 		UserDto userDto = bridgeService.getUserDto(userId);
+<<<<<<< HEAD
 		UserProfileDto list = bridgeService.getPorfile(userId);
 		List<TagDto> taglist = bridgeService.getTaglist(list.getUserProfileIdx());
+=======
+		int idx = bridgeMapper.getProfileIdx(userId);
+		List<UserProfileDto> list = bridgeService.getPorfile(idx);
+		List<TagDto> taglist = bridgeService.getTaglist(idx);
+>>>>>>> main
 		List<ReviewDto> reviewDto = bridgeService.getReview(userId);
 		result.put("profile", list);
 		result.put("taglist", taglist);
@@ -109,5 +127,6 @@ public class UserProfileController {
 			return ResponseEntity.status(HttpStatus.OK).body(result);
 		}
 	}
+	
 
 }

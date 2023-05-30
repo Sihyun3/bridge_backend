@@ -11,9 +11,6 @@ import bridge.dto.ComposerRequestDto;
 import bridge.dto.ComposerRequestTagDto;
 import bridge.dto.KakaopayDto;
 import bridge.dto.MusicDto;
-import bridge.dto.PartnerContentDto;
-import bridge.dto.PartnerDetailCommentDto;
-import bridge.dto.PartnerDetailDto;
 import bridge.dto.PayListDto;
 import bridge.dto.ReportDto;
 import bridge.dto.ReviewDto;
@@ -65,8 +62,8 @@ public interface BridgeMapper {
 	//파트너 구인 작성-태그 입력
 	void insertPartnerTag(ComposerRequestDto composerRequestDto);
 
-	// 1. 파트너 협업창 조회
 	
+<<<<<<< HEAD
 	
 	// 2. 파트너 협업창 게시글 조회
 	List<PartnerContentDto> selectPartnerContent(int pdIdx) throws Exception;
@@ -100,6 +97,13 @@ public interface BridgeMapper {
 	UserProfileDto getPorfile(String userId);
 
 	List<TagDto> getTaglist(int tagIdx);
+=======
+	void insertTag(TagDto tag);
+
+	List<UserProfileDto> getPorfile(int idx);
+
+	List<TagDto> getTaglist(int idx);
+>>>>>>> main
 
 	List<ReviewDto> getReview(String userId);
 
@@ -118,6 +122,16 @@ public interface BridgeMapper {
 	void updatePartner(int crIdx);
 	//파트너구인 삭제
 	void deletePartner(int crIdx);
+
+	void partnerMoney(int pdIdx);
+
+	void moneyToZero();
+
+	int selectIdx(String userId);
+
+	void tagToProfile(TagDto tag);
+
+	int getProfileIdx(String userId);
 	
 
 }

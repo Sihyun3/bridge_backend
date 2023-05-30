@@ -60,7 +60,7 @@ public class KakaoPayService {
 		parameters.add("quantity", "1"); // 주문 수량
 		parameters.add("total_amount", String.valueOf(totalAmount)); //총 금액
 		parameters.add("tax_free_amount", "0"); //상품 비과세 금액
-		parameters.add("approval_url", "http://localhost:8080/order/pay/completed"); // 결제승인시 넘어갈 url
+		parameters.add("approval_url", "http://localhost:8080/order/pay/completed/{userId}"); // 결제승인시 넘어갈 url
 		parameters.add("cancel_url", "http://localhost:8080/order/pay/cancel"); // 결제취소시 넘어갈 url
 		parameters.add("fail_url", "http://localhost:8080/order/pay/fail"); // 결제 실패시 넘어갈 url
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
@@ -73,6 +73,7 @@ public class KakaoPayService {
 		log.info("결재준비 응답객체: " + readyResponse);
 		pod = uuid;
 		userId = userDto.getUserId();
+		log.info("1111111111111111" + userDto.getUserId());
 		this.totalAmount =  totalAmount;
 		return readyResponse;
 	}
@@ -84,6 +85,7 @@ public class KakaoPayService {
 			parameters.add("cid","TC0ONETIME");
 			parameters.add("tid", readyResponse.getTid());			
 			parameters.add("partner_order_id", pod); // 주문명
+			log.info("2222222222222" + userId);
 			
 			log.info("==========================" +pod);
 			

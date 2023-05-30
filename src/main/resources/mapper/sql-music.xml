@@ -140,15 +140,44 @@
 	</update>
 
 	<!-- 프로필 작성 -->
-	<insert id="insertProfile">
+	<insert id="insertProfile" parameterType="String"
+		useGeneratedKeys="true" keyProperty="userProfileIdx">
 		insert into user_profile
+<<<<<<< HEAD
 		(user_id, user_position,
 		user_introduction, profile_img, user_site,user_music,user_portfolio)
 		values
 		(#{userId}, #{userPosition}, #{userIntroduction}, #{profileImg},
 		#{userSite},#{userMusic},#{userPortfolio})
+=======
+		(user_id,
+		user_position,
+		user_introduction, profile_img, user_site,user_music,
+		user_portfolio)
+		values
+		(#{userId}, #{userPosition}, #{userIntroduction},
+		#{profileImg},
+		#{userSite},#{userMusic}, #{userPortfolio})
+>>>>>>> main
 	</insert>
 
+	<insert id="insertTag">
+		insert into user_tag(user_profile_idx,tag)
+		values
+		<foreach collection="tags" item="tags" separator=",">
+			(
+			#{userProfileIdx}, #{tags})
+		</foreach>
+	</insert>
+
+	<insert id="tagToProfile">
+		UPDATE user_profile
+		SET
+		user_tag1 = IFNULL(#{userTag1}, user_tag1),
+		user_tag2 = IFNULL(#{userTag2}, user_tag2),
+		user_tag3 = IFNULL(#{userTag3}, user_tag3)
+		WHERE user_profile_idx = #{userProfileIdx}
+	</insert>
 
 
 	<!-- 얜 무시 -->
@@ -159,16 +188,7 @@
 		where musicUUID = #{musicUUID}
 	</select>
 
-	<insert id="insertTag">
-		insert into user_tag(user_id,tag)
-		values
-		<foreach collection="tags" item="tags"
-			separator=",">
-			( #{userId}, #{tags})
-		</foreach>
-	</insert>
-	
-	
 
-	
+
+
 </mapper>  

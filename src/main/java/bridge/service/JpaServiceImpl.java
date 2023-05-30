@@ -91,9 +91,24 @@ public class JpaServiceImpl implements JpaService {
 	public int selectNoticeListCount() throws Exception {
 		return noticeMapper.selectNoticeListCount();
 	}
+	@Override
+    public void openChat(ChattingEntity chattingEntity) {
+		if(jpaChattingRepository.findByUserId1AndUserId2(chattingEntity.getUserId1(),chattingEntity.getUserId2()).size() < 1
+		        && jpaChattingRepository.findByUserId1AndUserId2(chattingEntity.getUserId2(),chattingEntity.getUserId1()).size() < 1
+				) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	        jpaChattingRepository.save(chattingEntity);
 
+<<<<<<< HEAD
 	
 
+=======
+		}
+		System.out.println(">>>>>>>>>>>오픈챗 서비스");
+        jpaChattingRepository.save(chattingEntity);
+        System.out.println(">>>>>>>>>>>오픈챗 서비스 나옴");
+    }
+>>>>>>> main
 
 
 }

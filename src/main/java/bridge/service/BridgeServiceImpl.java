@@ -11,9 +11,7 @@ import bridge.dto.CommentsDto;
 import bridge.dto.ComposerRequestDto;
 import bridge.dto.ComposerRequestTagDto;
 import bridge.dto.MusicDto;
-import bridge.dto.PartnerContentDto;
-import bridge.dto.PartnerDetailCommentDto;
-import bridge.dto.PartnerDetailDto;
+
 import bridge.dto.PayListDto;
 import bridge.dto.ReportDto;
 import bridge.dto.ReviewDto;
@@ -110,6 +108,7 @@ public class BridgeServiceImpl implements BridgeService {
 		return bridgeMapper.insertPartnerWrite(composerRequestDto);
 	}
 
+<<<<<<< HEAD
 //	@Override
 //	public int doCharge(UserDto userDto) {
 //		return bridgeMapper.doCharge(userDto);
@@ -171,6 +170,8 @@ public class BridgeServiceImpl implements BridgeService {
 		return bridgeMapper.insertPartnerComment(partnerDetailCommentDto);
 	}
 
+=======
+>>>>>>> main
 	@Override
 	public void insertTag(TagDto tag) {
 		// TODO Auto-generated method stub
@@ -178,15 +179,23 @@ public class BridgeServiceImpl implements BridgeService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public UserProfileDto getPorfile(String userId) {
+=======
+	public List<UserProfileDto> getPorfile(int idx) {
+>>>>>>> main
 		// TODO Auto-generated method stub
-		return bridgeMapper.getPorfile(userId);
+		return bridgeMapper.getPorfile(idx);
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<TagDto> getTaglist(int userId) {
+=======
+	public List<TagDto> getTaglist(int idx) {
+>>>>>>> main
 		// TODO Auto-generated method stub
-		return bridgeMapper.getTaglist(userId);
+		return bridgeMapper.getTaglist(idx);
 	}
 
 	@Override
@@ -218,6 +227,12 @@ public class BridgeServiceImpl implements BridgeService {
 	public UserDto getUserDto(String userId) {
 		return loginMapper.selectUserByUserId(userId);
 
+	}
+
+	@Override
+	public void partnerMoney(int pdIdx) {
+		bridgeMapper.partnerMoney(pdIdx);
+//		bridgeMapper.moneyToZero();
 	}
 
 }

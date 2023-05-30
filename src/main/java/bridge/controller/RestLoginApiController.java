@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bridge.dto.UserDto;
 import bridge.security.JwtTokenUtil;
 import bridge.service.LoginService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class RestLoginApiController {
@@ -23,6 +24,7 @@ public class RestLoginApiController {
 	@Autowired
 	private LoginService loginService;
 
+	@ApiOperation(value="회원가입")
 	@PostMapping("/api/regist")
 	public ResponseEntity<Object> regist(@RequestBody UserDto userDto) throws Exception {
 		int registedCount = loginService.registUser(userDto);
@@ -36,6 +38,7 @@ public class RestLoginApiController {
 	@Autowired
 	JwtTokenUtil jwtTokenUtil;
 
+<<<<<<< HEAD
 	@PostMapping("/api/login")
 	public void login(@RequestBody UserDto userDto, HttpServletResponse response) throws Exception {
 		UserDto userDtos = loginService.getloginDto(userDto);
@@ -44,6 +47,8 @@ public class RestLoginApiController {
 		response.getWriter().write(jwtToken);
 	}
 
+=======
+>>>>>>> main
 	@GetMapping("/api/user")
 	public ResponseEntity<UserDto> currentUserName(Authentication authentication) {
 		try {
@@ -61,22 +66,29 @@ public class RestLoginApiController {
 		String jwtToken = jwtTokenUtil.generateToken(usersDto1);
 		response.setHeader("token", jwtToken);
 		response.getWriter().write(jwtToken);
-
 	}
 
-	// 아이디 중복확인
+	@ApiOperation(value="아이디 중복 확인")
 	@PostMapping("/api/idlist/{userId}")
 	public int userIdCheck(@PathVariable("userId") String userId) throws Exception {
 		int result = loginService.userIdCheck(userId);
 		return result;
 	}
+<<<<<<< HEAD
 	
+=======
+	@ApiOperation(value="아이디 찾기")
+>>>>>>> main
 	@PostMapping("/api/findid/{email}")
 	public String findId(@PathVariable("email") String email) {
 		String result = loginService.findId(email);
 		return result;
 	}
+<<<<<<< HEAD
 	
+=======
+	@ApiOperation(value="비밀번호 찾기")
+>>>>>>> main
 	@PutMapping("api/findPassword/{email}/{password}")
 	public void findPassword(@PathVariable("email")String email,@PathVariable("password")String password) {
 		loginService.findPassword(email,password);	

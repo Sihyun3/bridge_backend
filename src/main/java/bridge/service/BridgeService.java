@@ -9,10 +9,6 @@ import bridge.dto.CommentsDto;
 import bridge.dto.ComposerRequestDto;
 import bridge.dto.ComposerRequestTagDto;
 import bridge.dto.MusicDto;
-import bridge.dto.PartnerContentDto;
-import bridge.dto.PartnerDetailCommentDto;
-import bridge.dto.PartnerDetailDto;
-import bridge.dto.PayListDto;
 import bridge.dto.ReportDto;
 import bridge.dto.ReviewDto;
 import bridge.dto.TagDto;
@@ -55,6 +51,7 @@ public interface BridgeService {
 
 	public int insertProfile(UserProfileDto userProfileDto);
 
+<<<<<<< HEAD
 //	public int doCharge(UserDto userDto);
 	
 	// 1. 파트너 협업창 조회
@@ -92,6 +89,14 @@ public interface BridgeService {
 	public UserProfileDto getPorfile(String userId);
 
 	public List<TagDto> getTaglist(int i);
+=======
+
+	public void insertTag(TagDto tag);
+
+	public List<UserProfileDto> getPorfile(int idx);
+
+	public List<TagDto> getTaglist(int idx);
+>>>>>>> main
 
 	public List<ReviewDto> getReview(String userId);
 
@@ -102,6 +107,8 @@ public interface BridgeService {
 
 	public List<ComposerRequestTagDto> partnerTagList();
 	public UserDto getUserDto(String userId);
+
+	public void partnerMoney(int pdIdx);
 
 
 }
