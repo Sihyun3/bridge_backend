@@ -14,11 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.ResponseBody;
-=======
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> main
 
 import bridge.dto.UserDto;
 import bridge.entity.ChattingEntity;
@@ -67,11 +63,7 @@ public class JpaMessageController {
     	map.put("chatting",chattingEntity);
     	return ResponseEntity.status(HttpStatus.OK).body(map);
     }
-    @PostMapping("/api/chatroom")
-    public void openChat(@RequestBody ChattingEntity chattingEntity){
-    	jpaService.insertChat(chattingEntity);
-    	
-    }
+
     
     @ApiOperation(value="채팅 메세지 조회")
     @MessageMapping("/hello")

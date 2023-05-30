@@ -54,10 +54,8 @@ public class RestApiController {
 	@Autowired
 	private BridgeMapper bridgeMapper;
 
-<<<<<<< HEAD
-=======
+
 	@ApiOperation(value = "음악 파일 조회")
->>>>>>> main
 	@GetMapping("/api/getMusic/{musicUUID}")
 	public void getMusic(@PathVariable("musicUUID") String musicUUID, HttpServletResponse response) throws Exception {
 		FileInputStream fis = null;
@@ -69,11 +67,8 @@ public class RestApiController {
 		try {
 			response.setHeader("Content-Disposition", "inline;");
 			byte[] buf = new byte[1024];
-<<<<<<< HEAD
-			fis = new FileInputStream(UPLOAD_PATH + musicUUID);
-=======
 			fis = new FileInputStream(UPLOAD_PATH + musicUUID + ".mp3");
->>>>>>> main
+
 			bis = new BufferedInputStream(fis);
 			bos = new BufferedOutputStream(response.getOutputStream());
 			int read;
@@ -107,7 +102,6 @@ public class RestApiController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
@@ -124,8 +118,7 @@ public class RestApiController {
 		timer.schedule(task,3600000 );
 //		1시간 3600000
 
-=======
->>>>>>> main
+
 		return ResponseEntity.ok(result);
 	}
 
@@ -266,11 +259,8 @@ public class RestApiController {
 		}
 	}
 
-<<<<<<< HEAD
-	// 신고 작성
-=======
+
 	@ApiOperation(value = "신고 작성")
->>>>>>> main
 	@PostMapping("/api/report/{reportedUserId}")
 	public ResponseEntity<Map<String, Object>> insertReport(@RequestBody ReportDto reportDto,
 			@PathVariable("reportedUserId") String reportedUserId) throws Exception {

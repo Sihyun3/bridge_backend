@@ -98,19 +98,12 @@ public class NoticeController {
 	@ApiOperation(value="공지 게시글 삭제")
 	@DeleteMapping("/api/notice/delete/{noticeIdx}")
 	public ResponseEntity<String> deleteNotice(@PathVariable ("noticeIdx") int noticeIdx, Authentication authentication) throws Exception{
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 		try {
 			UserDto userDto = (UserDto) authentication.getPrincipal();
 			NoticeDto noticeDto = jpaService.noticeDetail(noticeIdx);
 
 			if (noticeDto.getWriter().equals(noticeDto.getWriter()) || userDto.getUserId().equals("admin") ) {
-<<<<<<< HEAD
-				
-=======
->>>>>>> main
 				int deletedCount = jpaService.deleteNotice(noticeIdx);
 				if (deletedCount != 1) {
 					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("삭제에 실패했습니다");
@@ -125,7 +118,7 @@ public class NoticeController {
 		}
 	}
 }
-<<<<<<< HEAD
+
 	
 //	@GetMapping("/api/notice/search")
 //	public ResponseEntity<List<NoticeDto>> getSerchList(@RequestParam(value = "search") String search) {
@@ -138,9 +131,4 @@ public class NoticeController {
 //	        }
 //	    }
 //}
-=======
 
-	
-
-
->>>>>>> main

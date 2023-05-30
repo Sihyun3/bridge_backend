@@ -108,14 +108,10 @@ public class UserProfileController {
 	public ResponseEntity<Map<String, Object>> getPorfile(@PathVariable("userId") String userId) throws Exception {
 		Map<String, Object> result = new HashMap<>();
 		UserDto userDto = bridgeService.getUserDto(userId);
-<<<<<<< HEAD
-		UserProfileDto list = bridgeService.getPorfile(userId);
-		List<TagDto> taglist = bridgeService.getTaglist(list.getUserProfileIdx());
-=======
+
 		int idx = bridgeMapper.getProfileIdx(userId);
 		List<UserProfileDto> list = bridgeService.getPorfile(idx);
 		List<TagDto> taglist = bridgeService.getTaglist(idx);
->>>>>>> main
 		List<ReviewDto> reviewDto = bridgeService.getReview(userId);
 		result.put("profile", list);
 		result.put("taglist", taglist);
