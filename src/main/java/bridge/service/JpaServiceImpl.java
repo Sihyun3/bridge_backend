@@ -99,16 +99,12 @@ public class JpaServiceImpl implements JpaService {
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	        jpaChattingRepository.save(chattingEntity);
 
-<<<<<<< HEAD
-	
 
-=======
 		}
 		System.out.println(">>>>>>>>>>>오픈챗 서비스");
         jpaChattingRepository.save(chattingEntity);
         System.out.println(">>>>>>>>>>>오픈챗 서비스 나옴");
     }
->>>>>>> main
-
+	
 
 }

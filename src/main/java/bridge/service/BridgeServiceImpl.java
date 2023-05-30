@@ -108,70 +108,8 @@ public class BridgeServiceImpl implements BridgeService {
 		return bridgeMapper.insertPartnerWrite(composerRequestDto);
 	}
 
-<<<<<<< HEAD
-//	@Override
-//	public int doCharge(UserDto userDto) {
-//		return bridgeMapper.doCharge(userDto);
-//	}
 
-	// 1. 파트너 협업창 조회
 
-	// 2. 파트너 협업창 게시글 조회
-	@Override
-	public List<PartnerContentDto> selectPartnerContent(int pdIdx) throws Exception {
-		return bridgeMapper.selectPartnerContent(pdIdx);
-	}
-
-	// 3. 파트너 협업창 게시글 상세조회
-	@Override
-	public PartnerContentDto selectPartnerContentDetail(int pcIdx) throws Exception {
-		return bridgeMapper.selectPartnerContentDetail(pcIdx);
-	}
-
-	// 4. 파트너 협업창 게시글 등록
-	@Override
-	public int insertPartnerContent(PartnerContentDto partnerContentDto) throws Exception {
-		return bridgeMapper.insertPartnerContent(partnerContentDto);
-	}
-
-	// 5. 파트너 협업창 게시글 수정
-	@Override
-	public int updatePartnerContent(PartnerContentDto partnerContentDto) throws Exception {
-		return bridgeMapper.updatePartnerContent(partnerContentDto);
-	}
-
-	// 6. 파트너 협업창 게시글 삭제
-	@Override
-	public int deletePartnerContent(int pcIdx) throws Exception {
-		return bridgeMapper.deletePartnerContent(pcIdx);
-	}
-
-	// 7. 파트너 협업창 결제 내역
-	@Override
-	public PayListDto selectPayList(int pdNumber) throws Exception {
-		return bridgeMapper.selectPayList(pdNumber);
-	}
-
-	// 8. 파트너 협업창 작업목록 조회
-	@Override
-	public List<PartnerDetailDto> selectProjectList(String userId1) throws Exception {
-		return bridgeMapper.selectProjectList(userId1);
-	}
-
-	// 9. 파트너 협업창 게시글의 댓글 조회
-	@Override
-	public List<PartnerDetailCommentDto> selectPartnerComment(int pcIdx) throws Exception {
-		return bridgeMapper.selectPartnerComment(pcIdx);
-	}
-
-	// 10. 파트너 협업창 게시글의 댓글 작성
-	@Override
-	public int insertPartnerComment(PartnerDetailCommentDto partnerDetailCommentDto) throws Exception {
-		return bridgeMapper.insertPartnerComment(partnerDetailCommentDto);
-	}
-
-=======
->>>>>>> main
 	@Override
 	public void insertTag(TagDto tag) {
 		// TODO Auto-generated method stub
@@ -179,21 +117,16 @@ public class BridgeServiceImpl implements BridgeService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public UserProfileDto getPorfile(String userId) {
-=======
+
 	public List<UserProfileDto> getPorfile(int idx) {
->>>>>>> main
+
 		// TODO Auto-generated method stub
 		return bridgeMapper.getPorfile(idx);
 	}
 
 	@Override
-<<<<<<< HEAD
-	public List<TagDto> getTaglist(int userId) {
-=======
+
 	public List<TagDto> getTaglist(int idx) {
->>>>>>> main
 		// TODO Auto-generated method stub
 		return bridgeMapper.getTaglist(idx);
 	}
