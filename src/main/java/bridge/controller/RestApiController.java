@@ -61,7 +61,7 @@ public class RestApiController {
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
-		String UPLOAD_PATH = "C:/home/ubuntu/temp/";
+		String UPLOAD_PATH = "/home/ubuntu/temp/";
 		System.out.println(">>>>>>>>>>>>>>>>>>>>    " + musicUUID);
 		System.out.println("++++++++++++++++++++++" + response);
 		try {
