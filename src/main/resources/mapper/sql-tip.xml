@@ -24,6 +24,7 @@
 	<select id="tipList" resultType="bridge.dto.TipDto">
 		select
 		tb_idx,user_id,tb_title,tb_heart from tip_board
+		order by tb_idx  DESC
 	</select>
 
 	<update id="updateViews" parameterType="int">
@@ -40,6 +41,8 @@
 		(user_id,tbc_comments,tb_idx)
 		values(#{userId},#{tbcComments},#{tbIdx})
 	</insert>
+	
+	
 	<update id="updateTip" parameterType="bridge.dto.TipDto">
 		update tip_board
 		set
@@ -50,12 +53,13 @@
 	</update>
 
 
-
 	<select id="selectHeartCount" parameterType="int"
 		resultType="bridge.dto.TipDto">
-		select tb_idx, tb_heart
+		select tip_idx, tb_heart
 		FROM tip_board
-		where tb_idx=#{tbIdx}
+		where tb_heart =
+		#{tbHeart}
+		AND tip_idx=#{tbIdx}
 	</select>
 
 
@@ -89,4 +93,5 @@
 		order by tb_heart desc
 		LIMIT 10
 	</select>
+
 </mapper>

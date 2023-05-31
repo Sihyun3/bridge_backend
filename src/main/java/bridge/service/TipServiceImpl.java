@@ -87,6 +87,5 @@ public class TipServiceImpl implements TipService{
 		return tipMapper.selectHeartsList();
 	}
 
-
-
 }
+

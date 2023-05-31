@@ -34,3 +34,4 @@ public interface TipService {
 	List<TipDto> selectHeartsList();
 
 }
+

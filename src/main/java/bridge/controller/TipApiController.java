@@ -20,7 +20,6 @@ import bridge.dto.TipCommentsDto;
 import bridge.dto.TipDto;
 import bridge.dto.UserDto;
 import bridge.service.TipService;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,6 +28,7 @@ public class TipApiController {
 	@Autowired
 	TipService tipService;
 	
+
 	@PostMapping("/api/inserttip")
 	public ResponseEntity<Object> insertTip(@RequestBody TipDto tipDto, Authentication authentication)
 			throws Exception {
@@ -145,4 +145,5 @@ public class TipApiController {
 		}
 	}
 }
+
 
