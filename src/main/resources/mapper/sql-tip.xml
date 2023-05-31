@@ -3,6 +3,7 @@
 
 <mapper namespace="bridge.mapper.TipMapper">
 
+
 	<insert id="insertTip" parameterType="bridge.dto.TipDto">
 		insert into tip_board
 		(tb_title,tb_contents,user_id,tb_createdt)
@@ -19,10 +20,12 @@
 		select * from tip_board_comments
 		where tb_idx = #{tbIdx}
 	</select>
+
 	<select id="tipList" resultType="bridge.dto.TipDto">
 		select
 		tb_idx,user_id,tb_title,tb_heart from tip_board
 	</select>
+
 	<update id="updateViews" parameterType="int">
 		update tip_board
 		set
@@ -30,6 +33,7 @@
 		tb_views + 1
 		where tb_idx = #{tbIdx}
 	</update>
+
 	<insert id="insertComment"
 		parameterType="bridge.dto.TipCommentsDto">
 		insert into tip_board_comments
@@ -41,18 +45,48 @@
 		set
 		tb_title = #{tbTitle},
 		tb_contents = #{tbContents},
-		tb_createdt = now()
+		tb_createdt = now(),
 		where tb_idx = #{tbIdx}
 	</update>
+
+
+
+	<select id="selectHeartCount" parameterType="int"
+		resultType="bridge.dto.TipDto">
+		select tb_idx, tb_heart
+		FROM tip_board
+		where tb_idx=#{tbIdx}
+	</select>
+
+
+	<!-- 사용자 : 뮤지컬 정보 상세조회 - 좋아요 수 업데이트 -->
+	<update id="updateHeartCount" parameterType="int">
+		UPDATE tip_board
+		SET
+		tb_heart = tb_heart + 1
+		where tb_idx = #{tbIdx}
+	</update>
+	<!-- 사용자 : 뮤지컬 정보 상세조회 - 좋아요 수 취소 -->
+	<update id="cancleHeartCount" parameterType="int">
+		UPDATE tip_board
+		SET
+		tb_heart = tb_heart - 1
+		where tb_idx = #{tbIdx}
+	</update>
+
 	<delete id="deleteTip" parameterType="Integer">
 		DELETE
 		FROM tip_board
-		WHERE tb_idx = #{tbIdx} 
+		WHERE
+		tb_idx = #{tbIdx}
 	</delete>
-	<insert id="updateHeart" parameterType="Integer">
-		update tip_board
-		set
-		tb_Heart = tb_Heart+1 
+
+	<!-- 좋아요순 출력 -->
+	<select id="selectHeartsList" resultType="bridge.dto.TipDto">
+		select tb_idx, user_id, tb_title, tb_heart
+		from tip_board
 		where tb_idx = #{tbIdx}
-	</insert>
+		order by tb_heart desc
+		LIMIT 10
+	</select>
 </mapper>

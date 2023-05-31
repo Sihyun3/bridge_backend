@@ -9,6 +9,7 @@ import bridge.dto.TipDto;
 @Mapper
 public interface TipMapper {
 
+
 	int insertTip(TipDto tipDto);
 
 	TipDto tipdetail(int tbIdx);
@@ -25,6 +26,14 @@ public interface TipMapper {
 
 	void deleteTip(int tbIdx);
 
-	void updateHeart(int tbIdx);
+	TipDto selectHeartCount(int tbIdx);
+
+//	int updateHeartCount(int tbHeart);
+
+	int updateHeartCount(TipDto tipDto);
+
+	int cancleHeartCount(TipDto tipDto);
+
+	List<TipDto> selectHeartsList();
 
 }

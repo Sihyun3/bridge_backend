@@ -143,13 +143,7 @@
 	<insert id="insertProfile" parameterType="String"
 		useGeneratedKeys="true" keyProperty="userProfileIdx">
 		insert into user_profile
-<<<<<<< HEAD
-		(user_id, user_position,
-		user_introduction, profile_img, user_site,user_music,user_portfolio)
-		values
-		(#{userId}, #{userPosition}, #{userIntroduction}, #{profileImg},
-		#{userSite},#{userMusic},#{userPortfolio})
-=======
+
 		(user_id,
 		user_position,
 		user_introduction, profile_img, user_site,user_music,
@@ -158,7 +152,6 @@
 		(#{userId}, #{userPosition}, #{userIntroduction},
 		#{profileImg},
 		#{userSite},#{userMusic}, #{userPortfolio})
->>>>>>> main
 	</insert>
 
 	<insert id="insertTag">

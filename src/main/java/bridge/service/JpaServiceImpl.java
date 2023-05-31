@@ -1,5 +1,6 @@
 package bridge.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,11 +51,10 @@ public class JpaServiceImpl implements JpaService {
 		List<ChattingEntity> a = (List<ChattingEntity>) jpaChattingRepository.findByUserId1(userId);
 		List<ChattingEntity> b = (List<ChattingEntity>) jpaChattingRepository.findByUserId2(userId);
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaa" + a+"BBBBBBBBBBBBBBBBBBBBBBBBBBB" + b);
-		if(a != null) {
-			return a;
-		}else {
-			return b;
-		}
+		List<ChattingEntity> returnList = new ArrayList<ChattingEntity>();
+		returnList.addAll(a);
+		returnList.addAll(b);
+		return returnList;
 	}
 	@Override
 	public List<NoticeDto> noticeList() throws Exception {
