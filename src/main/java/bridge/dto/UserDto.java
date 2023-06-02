@@ -10,7 +10,7 @@ public class UserDto {
 	private String userEmail;
 	private String userPhoneNumber;
 	private int userPoint;
-	private boolean userHalted;
+	private int userHalted;
 	private int reportCount;
 
 }

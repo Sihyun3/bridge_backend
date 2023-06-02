@@ -48,29 +48,30 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	}
 
 	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+            Authentication authResult) throws IOException, ServletException {
 
-		String username = (((User) authResult.getPrincipal()).getUsername());
-		UserDto userDto = loginMapper.selectUserByUserId(username);
+        String username = (((User) authResult.getPrincipal()).getUsername());
+        UserDto userDto = loginMapper.selectUserByUserId(username);
 
-		int halted = loginMapper.selectHalted(username);
+//        int halted = loginMapper.selectHalted(username);
+        int halted = userDto.getUserHalted();
 
-		if (halted == 1) {
-			String jwtToken = jwtTokenUtil.generateToken(userDto);
-			response.setHeader("halted", Integer.toString(halted));
-			response.getWriter().print(halted);
-			log.debug("Request Headers>>>>>>>>>>>>>: " + request.getHeaderNames());
-			log.debug("Response Headers>>>>>>>>>>>>>>: " + response.getHeaderNames());
-			response.setHeader("token", jwtToken);
-			response.getWriter().print(jwtToken);
-		} else if (halted == 0) {
-			response.addHeader("halted", Integer.toString(halted));
-			response.getWriter().print(halted);
-			String jwtToken = jwtTokenUtil.generateToken(userDto);
-			response.addHeader("token", jwtToken);
-			response.getWriter().print(jwtToken);
-		}
-	}
+        if (halted == 1) {
+            String jwtToken = jwtTokenUtil.generateToken(userDto);
+            response.setHeader("halted", Integer.toString(halted));
+            response.getWriter().print(halted);
+            log.debug("Request Headers>>>>>>>>>>>>>: " + request.getHeaderNames());
+            log.debug("Response Headers>>>>>>>>>>>>>>: " + response.getHeaderNames());
+            response.setHeader("token", jwtToken);
+            response.getWriter().print(jwtToken);
+        } else if (halted == 0) {
+            response.addHeader("halted", Integer.toString(halted));
+            response.getWriter().print(halted);
+            String jwtToken = jwtTokenUtil.generateToken(userDto);
+            response.addHeader("token", jwtToken);
+            response.getWriter().print(jwtToken);
+        }
+    }
 
 }
