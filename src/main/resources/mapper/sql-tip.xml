@@ -55,9 +55,9 @@
 
 	<select id="selectHeartCount" parameterType="int"
 		resultType="bridge.dto.TipDto">
-		select tip_idx, tb_heart
-		FROM tip_board
-		AND tip_idx=#{tbIdx}
+		select tb_idx, tb_heart
+		FROM tb_board
+		AND tb_idx=#{tbIdx}
 	</select>
 
 
