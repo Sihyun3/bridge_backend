@@ -3,7 +3,7 @@
 
 <mapper namespace="bridge.mapper.KakaoPayMapper">
 	<insert id ="insertPay" parameterType="bridge.dto.ApproveResponseDto">
-	insert into Kakaopay_list(user_id,tid,partner_order_id,created_at, money)
+	insert into kakaopay_list(user_id,tid,partner_order_id,created_at, money)
 	values (#{partner_user_id},#{tid},#{partner_order_id},#{created_at}, #{money})
 	</insert>
 	
