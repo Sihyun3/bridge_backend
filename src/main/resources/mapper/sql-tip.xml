@@ -57,7 +57,7 @@
 		resultType="bridge.dto.TipDto">
 		select tb_idx, tb_heart
 		FROM tb_board
-		AND tb_idx=#{tbIdx}
+		Where tb_idx=#{tbIdx}
 	</select>
 
 

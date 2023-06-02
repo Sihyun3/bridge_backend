@@ -7,5 +7,5 @@ public class LoginDto {
 	private String userId;
 	private String userPassword;
 	
-	private boolean halted;
+	private boolean userHalted;
 }
