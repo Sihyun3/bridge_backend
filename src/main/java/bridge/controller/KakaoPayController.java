@@ -63,7 +63,7 @@ public class KakaoPayController {
 		
 		log.info("33333333333333" + userId);
 	
-		response.sendRedirect("https://bridge-music.life");
+		response.sendRedirect("https://www.bridge-music.life");
 	}
 
 	@ApiOperation(value="카카오페이 결제 취소")

@@ -60,9 +60,9 @@ public class KakaoPayService {
 		parameters.add("quantity", "1"); // 주문 수량
 		parameters.add("total_amount", String.valueOf(totalAmount)); //총 금액
 		parameters.add("tax_free_amount", "0"); //상품 비과세 금액
-		parameters.add("approval_url", "https://api.bridge-music:8080/order/pay/completed/{userId}"); // 결제승인시 넘어갈 url
-		parameters.add("cancel_url", "https://api.bridge-music:8080/order/pay/cancel"); // 결제취소시 넘어갈 url
-		parameters.add("fail_url", "https://api.bridge-music:8080/order/pay/fail"); // 결제 실패시 넘어갈 url
+		parameters.add("approval_url", "https://api.bridge-music.life:8080/order/pay/completed/{userId}"); // 결제승인시 넘어갈 url
+		parameters.add("cancel_url", "https://api.bridge-music.life:8080/order/pay/cancel"); // 결제취소시 넘어갈 url
+		parameters.add("fail_url", "https://api.bridge-music.life:8080/order/pay/fail"); // 결제 실패시 넘어갈 url
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 		
 		RestTemplate template = new RestTemplate();
