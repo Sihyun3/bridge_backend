@@ -13,7 +13,7 @@
 	<select id="selectUserByUserId" parameterType="String" resultType="bridge.dto.UserDto">
 		select user_id, user_password, user_name,  user_email, user_phone_number, user_point, user_halted, report_count
 		  from users
-		 where user_id = #{userId} and  user_halted = false
+		 where user_id = #{userId}
 	</select>
 	
 
