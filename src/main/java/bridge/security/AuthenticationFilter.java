@@ -54,8 +54,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		String username = (((User) authResult.getPrincipal()).getUsername());
 		UserDto userDto = loginMapper.selectUserByUserId(username);
 
-//        int halted = loginMapper.selectHalted(username);
-		int halted = userDto.getUserHalted();
+     int halted = loginMapper.selectHalted(username);
+		// int halted = userDto.getUserHalted();
 
 		if (halted == 1) {
 			String jwtToken = jwtTokenUtil.generateToken(userDto);
@@ -66,8 +66,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			response.setHeader("token", jwtToken);
 			response.getWriter().print(jwtToken);
 		} else if (halted == 0) {
-			response.addHeader("halted", Integer.toString(halted));
-			response.getWriter().print(halted);
+			 response.addHeader("halted", Integer.toString(halted));
+			 response.getWriter().print(halted);
+			 String jwtToken = jwtTokenUtil.generateToken(userDto);
+			 response.addHeader("token", jwtToken);
+			 response.getWriter().print(jwtToken);
 
 		}
 	}
