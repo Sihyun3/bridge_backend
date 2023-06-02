@@ -48,7 +48,7 @@
 		set
 		tb_title = #{tbTitle},
 		tb_contents = #{tbContents},
-		tb_createdt = now(),
+		tb_createdt = now()
 		where tb_idx = #{tbIdx}
 	</update>
 
