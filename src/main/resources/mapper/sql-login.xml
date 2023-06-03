@@ -20,7 +20,7 @@
 	<!-- 외부 로그인 -->
 	<select id ="passInformation" parameterType="bridge.dto.UserDto" resultType="bridge.dto.UserDto">
 
-		select user_name, user_email from users
+		select * from users
 			where user_name = #{userName} and user_email=#{userEmail} and user_halted =false
 
 	</select>
